@@ -153,68 +153,63 @@ Install and Configure Lint (Linter), Lint-Staged (Staged Commits Linter), and Co
         "@angular-eslint/sort-lifecycle-methods": ["error"],
         "@angular-eslint/no-pipe-impure": ["error"],
         "@angular-eslint/use-lifecycle-interface": ["error"],
-        "quotes": [
-          // Regla para usar doble comilla
-          "error",
-          "double",
-          {
-            "avoidEscape": true,
-            "allowTemplateLiterals": true
-          }
-        ],
-        "@typescript-eslint/quotes": [
-          "error",
-          "double",
-          {
-            "avoidEscape": true,
-            "allowTemplateLiterals": true
-          }
-        ],
-        "eqeqeq": [
-          // Regla para igualación estricta (=== OR !==)
-          "error",
-          "smart"
-        ],
-        "no-console": [
-          // Regla para evitar los consoles
-          "error"
-        ],
-        "no-else-return": [
-          // Regla para no permitir else como return
-          "error",
-          {
-            "allowElseIf": true
-          }
-        ],
-        "no-empty": [
-          // Regla para no permitir blocks vacios
-          "error",
-          {
-            "allowEmptyCatch": false
-          }
-        ],
-        "no-extra-semi": [
-          // Regla para no permitir doble punto y coma
-          "error"
-        ],
-        "@typescript-eslint/no-extra-semi": ["error"],
-        "semi": [
-          // Regla para verificar si tiene punto y comal al final
-          "error",
-          "always",
-          {
-            "omitLastInOneLineBlock": true,
-            "omitLastInOneLineClassBody": true
-          }
-        ],
-        "@typescript-eslint/semi": [
-          "error",
-          "always",
-          {
-            "omitLastInOneLineBlock": true,
-            "omitLastInOneLineClassBody": true
-          }
-        ]
+        "quotes": [ // Rule for using double quotes
+      "error",
+      "double",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "@typescript-eslint/quotes": [
+      "error",
+      "double",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "eqeqeq": [ // Rule for strict equality (=== or !==)
+      "error",
+      "smart"
+    ],
+    "no-console": [ // Rule to avoid using console statements
+      "error"
+    ],
+    "no-else-return": [ // Rule to disallow else as a return
+      "error",
+      {
+        "allowElseIf": true
+      }
+    ],
+    "no-empty": [ // Rule to disallow empty blocks
+      "error",
+      {
+        "allowEmptyCatch": false
+      }
+    ],
+    "no-extra-semi": [ // Rule to disallow extra semicolons
+      "error"
+    ],
+    "@typescript-eslint/no-extra-semi": [
+      "error"
+    ],
+    "semi": [ // Rule to ensure there is a semicolon at the end
+      "error",
+      "always",
+      {
+        "omitLastInOneLineBlock": true,
+        "omitLastInOneLineClassBody": true
+      }
+    ],
+    "@typescript-eslint/semi": [
+      "error",
+      "always",
+      {
+        "omitLastInOneLineBlock": true,
+        "omitLastInOneLineClassBody": true
+      }
+    ]
       }
     }
   ]
