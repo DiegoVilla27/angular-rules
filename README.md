@@ -11,6 +11,11 @@ Rules to linters (Angular and TypeScript), prettier, husky and commitlint
 
 Run `ng serve` for a dev server and navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+## Testing
+
+- Script -> `"test": "ng test --code-coverage"` (Executes all unit tests)
+- Script -> `"test:one": "ng test --code-coverage --watch --include=your-url-relative-component-here"` (Executes a single unit test)
+
 ## Commits
 
 Commit Structure Guidelines:
@@ -22,7 +27,7 @@ Commit Structure Guidelines:
 - `test: Subject` (Adds or updates unit tests or end-to-end tests)
 - `refactor: Subject` (Improves existing code without changing functionality)
 
-> ¡IMPORTANT! _`Subject is sentence-case`_ 
+> ¡IMPORTANT! _`Subject is sentence-case`_
 
 ## Please follow these steps:
 
@@ -60,8 +65,9 @@ Install and Configure Husky (Git Hooks)
 Install and Configure Prettier
 
 - `npm i -D prettier`
-- Script -> `"pretier": "prettier . --write"` (Exec prettier for all files). 
+- Script -> `"pretier": "prettier . --write"` (Exec prettier for all files).
 - Create file _`.prettierrc.json`_
+
 ```json
 {
   "tabWidth": 2,
@@ -87,7 +93,9 @@ Install and Configure Prettier
   ]
 }
 ```
+
 - Create or update file _`.editorconfig`_
+
 ```json
 root = true
 
@@ -111,24 +119,16 @@ trim_trailing_whitespace = false
 Install and Configure Lint (Linter), Lint-Staged (Staged Commits Linter), and Commit Lint (Conventional Commits)
 
 - `npm i -D lint-staged @commitlint/types @commitlint/cli @commitlint/config-conventional @angular-eslint/builder @angular-eslint/eslint-plugin @angular-eslint/eslint-plugin-template @angular-eslint/schematics @angular-eslint/template-parser @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint`
-- Create file _`.eslintrc.json`_ 
+- Create file _`.eslintrc.json`_
+
 ```json
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
-      "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
-      ],
+      "files": ["*.ts"],
+      "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:@angular-eslint/recommended", "plugin:@angular-eslint/template/process-inline-templates"],
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",
@@ -146,18 +146,10 @@ Install and Configure Lint (Linter), Lint-Staged (Staged Commits Linter), and Co
             "style": "kebab-case"
           }
         ],
-        "@angular-eslint/no-empty-lifecycle-method": [
-          "error"
-        ],
-        "@angular-eslint/sort-lifecycle-methods": [
-          "error"
-        ],
-        "@angular-eslint/no-pipe-impure": [
-          "error"
-        ],
-        "@angular-eslint/use-lifecycle-interface": [
-          "error"
-        ],
+        "@angular-eslint/no-empty-lifecycle-method": ["error"],
+        "@angular-eslint/sort-lifecycle-methods": ["error"],
+        "@angular-eslint/no-pipe-impure": ["error"],
+        "@angular-eslint/use-lifecycle-interface": ["error"],
         "quotes": [
           // Regla para usar doble comilla
           "error",
@@ -202,9 +194,7 @@ Install and Configure Lint (Linter), Lint-Staged (Staged Commits Linter), and Co
           // Regla para no permitir doble punto y coma
           "error"
         ],
-        "@typescript-eslint/no-extra-semi": [
-          "error"
-        ],
+        "@typescript-eslint/no-extra-semi": ["error"],
         "semi": [
           // Regla para verificar si tiene punto y comal al final
           "error",
@@ -227,19 +217,23 @@ Install and Configure Lint (Linter), Lint-Staged (Staged Commits Linter), and Co
   ]
 }
 ```
+
 - Create file _`.lintstagedrc`_
+
 ```json
 {
   "**/*.{js,jsx,ts,tsx}": ["prettier --write", "eslint"]
 }
 ```
+
 - Script -> `"lint": "ng lint"` (Executes the linter)
 - Script -> `"lint:fix": "ng lint --fix ."` (Fixes errors reported by the linter)
 - Script -> `"lint:staged": "npx lint-staged"` (Executes the linter for files staged for commit)
 - Create file _`commitlint.config.ts`_
+
 ```typescript
-import type { UserConfig } from "@commitlint/types";
-import { RuleConfigSeverity } from "@commitlint/types";
+import type { UserConfig } from "@commitlint/types"
+import { RuleConfigSeverity } from "@commitlint/types"
 
 /** 
  * Docs https://commitlint.js.org/#/reference-rules
@@ -316,8 +310,8 @@ const Configuration: UserConfig = {
       "always"
     ]
   }
-};
-module.exports = Configuration;
+}
+module.exports = Configuration
 ```
 
 ## Errors or Tips
@@ -332,4 +326,4 @@ module.exports = Configuration;
 
 ## Developer
 
-> Developed By: __`Diego Villa`__. - Website: [https://www.cabuweb.com](https://www.cabuweb.com)
+> Developed By: **`Diego Villa`**. - Website: [https://www.cabuweb.com](https://www.cabuweb.com)
