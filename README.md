@@ -31,7 +31,7 @@ Commit Structure Guidelines:
 
 ## Please follow these steps:
 
-### Husky Lint Staged
+### Husky
 
 Install and Configure Husky (Git Hooks)
 
