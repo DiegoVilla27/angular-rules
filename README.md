@@ -317,6 +317,19 @@ const Configuration: UserConfig = {
 module.exports = Configuration
 ```
 
+- Please add the following configuration within the `"architect"` section of your _`angular.json`_ file
+```json
+"lint": {
+  "builder": "@angular-eslint/builder:lint",
+  "options": {
+    "lintFilePatterns": [
+      "src/**/*.ts",
+      "src/**/*.html"
+    ]
+  }
+}
+```
+
 ## Errors or Tips
 
 > To disable `@apply error scss` for _Tailwind CSS_ in VSCode, add the following script to your _.vscode > settings.json_: _`"scss.lint.unknownAtRules": "ignore"`_
