@@ -11,7 +11,7 @@
     "prepare": "husky install",
     "pretier": "prettier . --write",
     "lint": "ng lint",
-    "lint:fix": "ng lint --fix .",
+    "lint:fix": "ng lint --fix",
     "lint:staged": "npx lint-staged"
   },
   "private": true,
@@ -44,6 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@typescript-eslint/parser": "^7.11.0",
     "eslint": "^8.57.0",
+    "eslint-plugin-html": "^8.1.1",
     "husky": "^9.0.11",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",

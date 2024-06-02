@@ -3,6 +3,9 @@
   "ignorePatterns": [
     "projects/**/*"
   ],
+  "plugins": [
+    "html"
+  ],
   "overrides": [
     {
       "files": [

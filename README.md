@@ -118,13 +118,16 @@ trim_trailing_whitespace = false
 
 Install and Configure Lint (Linter), Lint-Staged (Staged Commits Linter), and Commit Lint (Conventional Commits)
 
-- `npm i -D lint-staged @commitlint/types @commitlint/cli @commitlint/config-conventional @angular-eslint/builder @angular-eslint/eslint-plugin @angular-eslint/eslint-plugin-template @angular-eslint/schematics @angular-eslint/template-parser @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint`
+- `npm i -D lint-staged @commitlint/types @commitlint/cli @commitlint/config-conventional @angular-eslint/builder @angular-eslint/eslint-plugin @angular-eslint/eslint-plugin-template @angular-eslint/schematics @angular-eslint/template-parser @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-plugin-html`
 - Create file _`.eslintrc.json`_
 
 ```json
 {
   "root": true,
   "ignorePatterns": ["projects/**/*"],
+  "plugins": [
+    "html"
+  ],
   "overrides": [
     {
       "files": ["*.ts"],
