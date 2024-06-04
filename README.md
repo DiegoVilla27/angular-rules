@@ -1,22 +1,22 @@
-# AngularRules
+# AngularRules 📁
 
 Rules to linters (Angular and TypeScript), prettier, husky and commitlint
 
 - This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
+```bash
+ng new angular-rules --style=scss --routing --prefix=rules
+```
 - Node - Version 20.12.2
 - Npm - Version 10.5.0
-- Creation command: `ng new angular-rules --style=scss --routing --prefix=rules`
 
-## Development server
+## Development server 🚀
 
-Run `ng serve` for a dev server and navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```bash
+ng serve
+```
+for a dev server and navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Testing
-
-- Script -> `"test": "ng test --code-coverage"` (Executes all unit tests)
-- Script -> `"test:one": "ng test --code-coverage --watch --include=your-url-relative-component-here"` (Executes a single unit test)
-
-## Commits
+## Commits 📝
 
 Commit Structure Guidelines:
 
@@ -27,26 +27,43 @@ Commit Structure Guidelines:
 - `test: Subject` (Adds or updates unit tests or end-to-end tests)
 - `refactor: Subject` (Improves existing code without changing functionality)
 
-> ¡IMPORTANT! _`Subject is sentence-case`_
+> IMPORTANT❗️ _`Subject is sentence-case`_
 
-## Please follow these steps:
+## Configuration ⚙️
+Please follow these steps:
 
 ### Husky
 
 Install and Configure Husky (Git Hooks)
+[Go to ↪](https://typicode.github.io/husky/get-started.html)
 
-- `npm i -D husky`
-- Script and Execute (One-time setup) -> `"prepare": "husky install"` (This command will create the _`.husky`_ folder in the root directory)
+```bash
+npm i -D husky
+```
+- Script and Execute (This command will create the _`.husky`_ folder in the root directory):
+```bash
+"prepare": "husky install"
+```
 - Create a Git Hook for `commit-msg` to run a regular expression validator (CommitLint) before each commit:
-  - Execute command (Old version): `npx husky add .husky/commit-msg 'npx --no -- commitlint --edit ${1}'`
-  - Execute command (New version): `echo "npx --no -- commitlint --edit \${1}" > .husky/commit-msg`
+  - Execute command (Old version):
+    ```bash
+    npx husky add .husky/commit-msg 'npx --no -- commitlint --edit ${1}'
+    ```
+  - Execute command (New version):
+    ```bash
+    echo "npx --no -- commitlint --edit \${1}" > .husky/commit-msg
+    ```
 - Create a Git Hook for `pre-commit` to run lint-staged (Prettier and ESLint) and tests before each commit:
-  - Script -> `"test:staged": "git diff --cached --diff-filter=d --name-only -- '*.spec.ts' | xargs -I {} ng test --include={} --browsers=ChromeHeadless --watch=false"`
+  - Script:
+    ```bash
+    "test:staged": "git diff --cached --diff-filter=d --name-only -- '*.spec.tsx' | xargs -I {} ng test --include={} --browsers=ChromeHeadless --watch=false"
+    ```
+    Explanation:
     - `git diff` Displays changes in files
     - `--cached` Shows only staged files
     - `--diff-filter=d` Ignores deleted files
     - `--name-only` Displays only file names
-    - `'*.spec.ts'` Filters only files with .spec.ts extension
+    - `'*.spec.tsx'` Filters only files with .test.tsx extension
     - `|` Redirects output from the previous command to the next
     - `xargs` Takes a list of elements and passes them as arguments to another command
     - `-I {}` Saves the list of elements in {}
@@ -54,18 +71,35 @@ Install and Configure Husky (Git Hooks)
     - `--include={}` Includes the saved list of elements for individual testing
     - `--browsers=ChromeHeadless` Runs tests in Chrome without the graphical interface
     - `--watch=false` Does not open the browser window
-  - Execute command (Old version): `npx husky add .husky/pre-commit "npx lint-staged && git diff --cached --diff-filter=d --name-only -- '*.spec.ts' | xargs -I {} ng test --include={} --browsers=ChromeHeadless --watch=false"`
-  - Execute command (New version): `echo "npx lint-staged && git diff --cached --diff-filter=d --name-only -- '*.spec.ts' | xargs -I {} ng test --include={} --browsers=ChromeHeadless --watch=false" > .husky/pre-commit`
+  - Execute command (Old version):
+    ```bash
+    npx husky add .husky/pre-commit "npx lint-staged && git diff --cached --diff-filter=d --name-only -- '*.spec.tsx' | xargs -I {} ng test --include={} --browsers=ChromeHeadless --watch=false"
+    ```
+  - Execute command (New version):
+    ```bash
+    echo "npx lint-staged && git diff --cached --diff-filter=d --name-only -- '*.spec.tsx' | xargs -I {} ng test --include={} --browsers=ChromeHeadless --watch=false" > .husky/pre-commit
+    ```
 - Create a Git Hook for `pre-push` to execute a specified command before each push:
-  - Execute command (Old version): `npx husky add .husky/pre-push "#HERE ANYTHING COMMAND"`
-  - Execute command (New version): `echo "#HERE ANYTHING COMMAND" > .husky/pre-push`
-
-### Prettier
+  - Execute command (Old version):
+    ```bash
+    npx husky add .husky/pre-push "#HERE ANYTHING COMMAND"
+    ```
+  - Execute command (New version):
+    ```bash
+    echo "#HERE ANYTHING COMMAND" > .husky/pre-push
+    ```
+    
+### Prettier 🎨
 
 Install and Configure Prettier
 
-- `npm i -D prettier`
-- Script -> `"pretier": "prettier . --write"` (Exec prettier for all files).
+```bash
+npm i -D prettier
+```
+- Script (Exec prettier for all files):
+  ```bash
+  "pretier": "prettier . --write"
+  ```
 - Create file _`.prettierrc.json`_
 
 ```json
@@ -114,11 +148,17 @@ max_line_length = off
 trim_trailing_whitespace = false
 ```
 
-### Lint, Lint-Staged and Commit Lint
+### Lint, Lint-Staged and Commit Lint 🔐
 
 Install and Configure Lint (Linter), Lint-Staged (Staged Commits Linter), and Commit Lint (Conventional Commits)
+[Go to ESLint ↪](https://eslint.org/docs/latest/use/getting-started)
+[Go to Lint Staged ↪](https://www.npmjs.com/package/lint-staged)
+[Go to Commit Lint ↪](https://commitlint.js.org/guides/getting-started.html)
 
-- `npm i -D lint-staged @commitlint/types @commitlint/cli @commitlint/config-conventional @angular-eslint/builder @angular-eslint/eslint-plugin @angular-eslint/eslint-plugin-template @angular-eslint/schematics @angular-eslint/template-parser @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-plugin-html`
+```bash
+npm i -D lint-staged @commitlint/types @commitlint/cli @commitlint/config-conventional @angular-eslint/builder @angular-eslint/eslint-plugin @angular-eslint/eslint-plugin-template @angular-eslint/schematics @angular-eslint/template-parser @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-plugin-html
+```
+
 - Create file _`.eslintrc.json`_
 
 ```json
@@ -224,11 +264,20 @@ Install and Configure Lint (Linter), Lint-Staged (Staged Commits Linter), and Co
 }
 ```
 
-- Script -> `"lint": "ng lint"` (Executes the linter)
-- Script -> `"lint:fix": "ng lint --fix ."` (Fixes errors reported by the linter)
-- Script -> `"lint:staged": "npx lint-staged"` (Executes the linter for files staged for commit)
-- Create file _`commitlint.config.ts`_
+- Script (Executes the linter):
+  ```bash
+  "lint": "ng lint"
+  ```
+- Script (Fixes errors reported by the linter):
+  ```bash
+  "lint:fix": "ng lint --fix ."
+  ``` 
+- Script (Executes the linter for files staged for commit):
+  ```bash
+  "lint:staged": "npx lint-staged"
+  ```
 
+- Create file _`commitlint.config.ts`_
 ```typescript
 import type { UserConfig } from "@commitlint/types"
 import { RuleConfigSeverity } from "@commitlint/types"
@@ -253,57 +302,57 @@ const Configuration: UserConfig = {
   extends: ["@commitlint/config-conventional"],
   rules: {
     "type-empty": [
-      // Se encarga de validar el tipo
+      // It is responsible for validating the type
       RuleConfigSeverity.Error,
       "never"
     ],
     "type-enum": [
-      // Se encarga de los tipos (Example: feat, fix, bug and others)
+      // It is responsible for managing types (e.g., feat, fix, bug, and others)
       RuleConfigSeverity.Error,
       "always",
       ["feat", "fix", "styles", "docs", "test", "refactor"]
     ],
     "type-case": [
-      // Se encarga del case en el type
+      // It is responsible for enforcing case conventions in the type
       RuleConfigSeverity.Error,
       "always",
       "lower-case"
     ],
     "scope-empty": [
-      // Se encarga del scope (Example: feat(frontend), fix(web) and others)
+      // It is responsible for managing the scope (e.g., feat(frontend), fix(web), and others)
       RuleConfigSeverity.Error,
       "always"
     ],
     "subject-empty": [
-      // Se encarga de validar el subject
+      // It is responsible for validating the subject
       RuleConfigSeverity.Error,
       "never"
     ],
     "subject-case": [
-      // Se encarga del case en el subject
+      // It is responsible for enforcing case conventions in the subject
       RuleConfigSeverity.Error,
       "always",
       "sentence-case"
     ],
     "subject-min-length": [
-      // Se encarga del tamaño minimo del subject
+      // It is responsible for ensuring the subject meets the minimum length requirement
       RuleConfigSeverity.Error,
       "always",
       10
     ],
     "subject-max-length": [
-      // Se encarga del tamaño máximo del subject
+      // It is responsible for enforcing the maximum length limit of the subject
       RuleConfigSeverity.Error,
       "always",
       50
     ],
     "body-empty": [
-      // Se encarga de validar el body
+      // It is responsible for validating the body
       RuleConfigSeverity.Error,
       "always"
     ],
     "footer-empty": [
-      // Se encarga de validar el footer
+      // It is responsible for validating the footer
       RuleConfigSeverity.Error,
       "always"
     ]
@@ -325,16 +374,30 @@ module.exports = Configuration
 }
 ```
 
-## Errors or Tips
+## Testing 🧪
+
+- Script (Executes all unit tests):
+  ```bash
+  "test": "ng test --code-coverage"
+  ```
+- Script (Executes a single unit test):
+  ```bash
+  "test:one": "ng test --code-coverage --watch --include=your-url-relative-component-here"
+  ```
+
+## Errors or Tips ❗️
 
 > To disable `@apply error scss` for _Tailwind CSS_ in VSCode, add the following script to your _.vscode > settings.json_: _`"scss.lint.unknownAtRules": "ignore"`_
 
 > If you encounter the error `Failed: Failed to set the 'adoptedStyleSheets' property on 'Document': Failed to convert value to 'CSSStyleSheet'.` in tests due to the presence of `ng-template`, manually add _`fixture.detectChanges();`_ after _`fixture = TestBed.createComponent(YourComponent)`_ to resolve it.
 
-> If Husky isn't working on MacOS, execute the command (within the root project): _`chmod ug+x .husky/*`_
+> If Husky isn't working on MacOS, execute the command (within the root project):
+```bash
+chmod ug+x .husky/*
+```
 
 > To view prettified console objects in testing, use the following syntax: `console.log(JSON.stringify(obj, undefined, 2));`
 
-## Developer
+## Developer 👨🏻‍💻
 
 > Developed By: **`Diego Villa`**. - Website: [https://www.cabuweb.com](https://www.cabuweb.com)
