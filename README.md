@@ -387,6 +387,8 @@ module.exports = Configuration
 
 ## Errors or Tips ❗️
 
+> Disable eslint line `// eslint-disable-next-line here-rule`
+
 > To disable `@apply error scss` for _Tailwind CSS_ in VSCode, add the following script to your _.vscode > settings.json_: _`"scss.lint.unknownAtRules": "ignore"`_
 
 > If you encounter the error `Failed: Failed to set the 'adoptedStyleSheets' property on 'Document': Failed to convert value to 'CSSStyleSheet'.` in tests due to the presence of `ng-template`, manually add _`fixture.detectChanges();`_ after _`fixture = TestBed.createComponent(YourComponent)`_ to resolve it.
