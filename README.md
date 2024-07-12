@@ -56,7 +56,7 @@ npm i -D husky
 - Create a Git Hook for `pre-commit` to run lint-staged (Prettier and ESLint) and tests before each commit:
   - Script:
     ```bash
-    "test:staged": "git diff --cached --diff-filter=d --name-only -- '*.spec.ts' | xargs -I {} ng test --include={} --browsers=ChromeHeadless --watch=false"
+    "test:staged": "git diff --cached --diff-filter=d --name-only -- '*.spec.ts' | xargs -I {} ng test --code-coverage --include={} --browsers=ChromeHeadless --watch=false"
     ```
     Explanation:
     - `git diff` Displays changes in files
