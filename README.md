@@ -56,28 +56,29 @@ npm i -D husky
 - Create a Git Hook for `pre-commit` to run lint-staged (Prettier and ESLint) and tests before each commit:
   - Script:
     ```bash
-    "test:staged": "git diff --cached --diff-filter=d --name-only -- '*.spec.tsx' | xargs -I {} ng test --include={} --browsers=ChromeHeadless --watch=false"
+    "test:staged": "git diff --cached --diff-filter=d --name-only -- '*.spec.ts' | xargs -I {} ng test --include={} --browsers=ChromeHeadless --watch=false"
     ```
     Explanation:
     - `git diff` Displays changes in files
     - `--cached` Shows only staged files
     - `--diff-filter=d` Ignores deleted files
     - `--name-only` Displays only file names
-    - `'*.spec.tsx'` Filters only files with .test.tsx extension
+    - `'*.spec.ts'` Filters only files with .test.tsx extension
     - `|` Redirects output from the previous command to the next
     - `xargs` Takes a list of elements and passes them as arguments to another command
     - `-I {}` Saves the list of elements in {}
     - `ng test` Executes tests
+    - `--code-coverage` Create coverage report
     - `--include={}` Includes the saved list of elements for individual testing
     - `--browsers=ChromeHeadless` Runs tests in Chrome without the graphical interface
     - `--watch=false` Does not open the browser window
   - Execute command (Old version):
     ```bash
-    npx husky add .husky/pre-commit "npx lint-staged && git diff --cached --diff-filter=d --name-only -- '*.spec.tsx' | xargs -I {} ng test --include={} --browsers=ChromeHeadless --watch=false"
+    npx husky add .husky/pre-commit "npx lint-staged && git diff --cached --diff-filter=d --name-only -- '*.spec.ts' | xargs -I {} ng test --code-coverage --include={} --browsers=ChromeHeadless --watch=false"
     ```
   - Execute command (New version):
     ```bash
-    echo "npx lint-staged && git diff --cached --diff-filter=d --name-only -- '*.spec.tsx' | xargs -I {} ng test --include={} --browsers=ChromeHeadless --watch=false" > .husky/pre-commit
+    echo "npx lint-staged && git diff --cached --diff-filter=d --name-only -- '*.spec.ts' | xargs -I {} ng test --code-coverage --include={} --browsers=ChromeHeadless --watch=false" > .husky/pre-commit
     ```
 - Create a Git Hook for `pre-push` to execute a specified command before each push:
   - Execute command (Old version):
@@ -88,6 +89,26 @@ npm i -D husky
     ```bash
     echo "#HERE ANYTHING COMMAND" > .husky/pre-push
     ```
+- Create and update _`karma.conf.js`_:
+    - `ng g config karma`
+    - Add this in coverageReporter:
+      ```js
+      check: {
+        global: {
+          statements: 80,
+          branches: 80,
+          functions: 80,
+          lines: 80
+        }
+      },
+      thresholds: {
+        statements: 80,
+        lines: 80,
+        branches: 80,
+        functions: 80
+      }
+      ```
+    - Add this in reporters array: `"coverage"`
     
 ### Prettier 🎨
 
