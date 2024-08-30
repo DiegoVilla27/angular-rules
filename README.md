@@ -56,7 +56,7 @@ npm i -D husky
 - Create a Git Hook for `pre-commit` to run lint-staged (Prettier and ESLint) and tests before each commit:
   - Script:
     ```bash
-    "test:staged": "git diff --cached --diff-filter=d --name-only -- '*.spec.ts' | xargs -I {} ng test --code-coverage --include={} --browsers=ChromeHeadless --watch=false"
+    "test:staged": "git diff --cached --diff-filter=d --name-only -- '*.spec.ts' | xargs -I {} npm run test --code-coverage --include={} --browsers=ChromeHeadless --watch=false"
     ```
     Explanation:
     - `git diff` Displays changes in files
@@ -67,18 +67,18 @@ npm i -D husky
     - `|` Redirects output from the previous command to the next
     - `xargs` Takes a list of elements and passes them as arguments to another command
     - `-I {}` Saves the list of elements in {}
-    - `ng test` Executes tests
+    - `npm run test` Executes tests
     - `--code-coverage` Create coverage report
     - `--include={}` Includes the saved list of elements for individual testing
     - `--browsers=ChromeHeadless` Runs tests in Chrome without the graphical interface
     - `--watch=false` Does not open the browser window
   - Execute command (Old version):
     ```bash
-    npx husky add .husky/pre-commit "npx lint-staged && git diff --cached --diff-filter=d --name-only -- '*.spec.ts' | xargs -I {} ng test --code-coverage --include={} --browsers=ChromeHeadless --watch=false"
+    npx husky add .husky/pre-commit "npx lint-staged && git diff --cached --diff-filter=d --name-only -- '*.spec.ts' | xargs -I {} npm run test --include={} --browsers=ChromeHeadless --watch=false"
     ```
   - Execute command (New version):
     ```bash
-    echo "npx lint-staged && git diff --cached --diff-filter=d --name-only -- '*.spec.ts' | xargs -I {} ng test --code-coverage --include={} --browsers=ChromeHeadless --watch=false" > .husky/pre-commit
+    echo "npx lint-staged && git diff --cached --diff-filter=d --name-only -- '*.spec.ts' | xargs -I {} npm run test --include={} --browsers=ChromeHeadless --watch=false" > .husky/pre-commit
     ```
 - Create a Git Hook for `pre-push` to execute a specified command before each push:
   - Execute command (Old version):
@@ -89,26 +89,6 @@ npm i -D husky
     ```bash
     echo "#HERE ANYTHING COMMAND" > .husky/pre-push
     ```
-- Create and update _`karma.conf.js`_:
-    - `ng g config karma`
-    - Add this in coverageReporter:
-      ```js
-      check: {
-        global: {
-          statements: 80,
-          branches: 80,
-          functions: 80,
-          lines: 80
-        }
-      },
-      thresholds: {
-        statements: 80,
-        lines: 80,
-        branches: 80,
-        functions: 80
-      }
-      ```
-    - Add this in reporters array: `"coverage"`
     
 ### Prettier 🎨
 
@@ -405,6 +385,60 @@ module.exports = Configuration
   ```bash
   "test:one": "ng test --code-coverage --watch --include=your-url-relative-component-here"
   ```
+
+- Create file _`karma.conf.js`_:
+```javascript
+// Karma configuration file, see link for more information
+// https://karma-runner.github.io/1.0/config/configuration-file.html
+
+module.exports = function (config) {
+  config.set({
+    basePath: "",
+    frameworks: ["jasmine", "@angular-devkit/build-angular"],
+    plugins: [
+      require("karma-jasmine"),
+      require("karma-chrome-launcher"),
+      require("karma-jasmine-html-reporter"),
+      require("karma-coverage"),
+      require("@angular-devkit/build-angular/plugins/karma")
+    ],
+    client: {
+      jasmine: {
+        // you can add configuration options for Jasmine here
+        // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
+        // for example, you can disable the random execution with `random: false`
+        // or set a specific seed with `seed: 4321`
+      },
+      clearContext: false // leave Jasmine Spec Runner output visible in browser
+    },
+    jasmineHtmlReporter: {
+      suppressAll: true // removes the duplicated traces
+    },
+    coverageReporter: {
+      dir: require("path").join(__dirname, "./coverage/angular-rules"),
+      subdir: ".",
+      reporters: [{ type: "html" }, { type: "text-summary" }],
+      check: {
+        global: {
+          statements: 80,
+          branches: 80,
+          functions: 80,
+          lines: 80
+        }
+      },
+      thresholds: {
+        statements: 80,
+        lines: 80,
+        branches: 80,
+        functions: 80
+      }
+    },
+    reporters: ["progress", "kjhtml", "coverage"],
+    browsers: ["Chrome"],
+    restartOnFileChange: true
+  });
+};
+```
 
 ## Errors or Tips ❗️
 
